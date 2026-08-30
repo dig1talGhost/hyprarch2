@@ -1,0 +1,89 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+    branches:
+      - "**"
+  merge_group:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Install check tools
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends shellcheck shfmt jq yamllint
+
+      - name: Verify required project paths
+        run: |
+          set -euo pipefail
+          for path in README.md .version src dotfiles; do
+            if [ ! -e "$path" ]; then
+              echo "Missing required path: $path"
+              exit 1
+            fi
+          done
+          echo "Required paths are present."
+
+      - name: Format shell scripts in src with shfmt
+        run: |
+          set -euo pipefail
+          find src -type f -name '*.sh' -print0 | xargs -0 -r shfmt -w
+
+      - name: Commit shell formatting on push
+        if: github.event_name == 'push'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Apply shfmt to src shell scripts
+          file_pattern: "src/**/*.sh"
+
+      - name: Require committed shell formatting
+        if: github.event_name != 'push'
+        run: |
+          set -euo pipefail
+          if ! git diff --quiet -- src; then
+            echo "shfmt changed files in src/. Run: find src -type f -name '*.sh' -print0 | xargs -0 -r shfmt -w"
+            git --no-pager diff -- src
+            exit 1
+          fi
+
+      - name: Lint shell scripts with shellcheck
+        run: |
+          set -euo pipefail
+          find src -type f -name '*.sh' -print0 | xargs -0 -r shellcheck
+
+      - name: Validate JSON/YAML files in dotfiles
+        run: |
+          set -euo pipefail
+
+          while IFS= read -r -d '' file; do
+            case "$file" in
+              *.json)
+                jq empty "$file"
+                ;;
+              *.yml|*.yaml)
+                yamllint "$file"
+                ;;
+            esac
+            echo "Validated: $file"
+          done < <(find dotfiles -type f \( -name '*.json' -o -name '*.yml' -o -name '*.yaml' \) -print0)
