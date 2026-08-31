@@ -23,8 +23,8 @@ If you like my project, feel free to give it a ⭐ !
 <br>
 
 ## 👻 `Sources`
-- [`dig1talGhost/wallpaper`](https://github.com/g5ostXa/wallpaper)
-- [`dig1talGhost/ghostshell`](https://github.com/g5ostXa/ghostshell)
+- [`g5ostXa/wallpaper`](https://github.com/g5ostXa/wallpaper)
+- [`g5ostXa/ghostshell`](https://github.com/g5ostXa/ghostshell)
 - [`Archwiki`](https://wiki.archlinux.org)
 - [`hyprpm/hyprland`](https://github.com/hyprwm/Hyprland)
 
