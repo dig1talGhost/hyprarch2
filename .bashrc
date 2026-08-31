@@ -1,4 +1,3 @@
-# shellcheck disable=SC2148
 #      __            __
 #     / /  ___ ____ / /  ________
 #    / _ \/ _ `(_-</ _ \/ __/ __/
@@ -32,7 +31,6 @@ alias r4in="unimatrix -n -s 96 -l o"
 export PATH="$HOME/src:$HOME/.local/bin:$HOME/go/bin:$PATH"
 export HYPRARCH2_VERSION_FILE="$HOME/.config/hyprarch2/.version/latest"
 if [[ -f "$HYPRARCH2_VERSION_FILE" ]]; then
-	# shellcheck disable=SC2155
 	export HYPRARCH2_VERSION=$(cat "$HYPRARCH2_VERSION_FILE")
 else
 	export HYPRARCH2_VERSION="unknown"
@@ -62,7 +60,7 @@ fi
 # // ===== Set fish interactively =====
 if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && -z ${BASH_EXECUTION_STRING} ]]; then
 	shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=''
-	exec fish "$LOGIN_OPTION"
+	exec fish $LOGIN_OPTION
 fi
 
 # // ===== Set UWSM for hyprland management =====
