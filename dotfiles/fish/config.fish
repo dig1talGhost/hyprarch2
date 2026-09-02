@@ -13,7 +13,7 @@ alias poweroff='~/src/Scripts/poweroff.sh'
 alias Hy2in='~/src/Scripts/hypr/start-hypr.sh'
 alias Hy2out='~/src/Scripts/hypr/killhypr.sh'
 alias lumine='~/src/Scripts/lumineV3.sh'
-alias r4in='unimatrix -n -s 96 -l o'
+alias r4in='unimatrix -a -f -b -s 97'
 end
 
 # // ===== STARSHIP INIT =====
