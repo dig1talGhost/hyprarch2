@@ -226,7 +226,8 @@
     "on-scroll-up": "uwsm app -- brightnessctl set 1%+",
     "on-scroll-down": "uwsm app -- brightnessctl set 1%-",
     "on-click": "uwsm app -- ghostty -e ~/src/Scripts/lumineV3.sh",
-    "tooltip": false
+    "tooltip": true,
+    "tooltip-format": ": Brightness (Laptop): {}%"
   },
   "battery": {
     "states": {
