@@ -1,6 +1,6 @@
 * {
 	font-family: "0xProto Nerd Font";
-	font-size: 18px;
+	font-size: 16px;
 	color: @main-fg;
 }
 
@@ -16,7 +16,7 @@ tooltip label {
 }
 
 #custom-power_menu {
-	font-size: 22px;
+	font-size: 20px;
 }
 
 /*--------------
