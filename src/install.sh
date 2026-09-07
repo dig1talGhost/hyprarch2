@@ -269,7 +269,7 @@ get_wallpaper() {
 		[Yy]*)
 			echo ";; Starting Installation..."
 			backup_existing "$HYPRARCH2_TARGET/wallpaper"
-			git clone --depth=1 https://github.com/g5ostXa/wallpaper.git "$HYPRARCH2_TARGET/wallpaper"
+			git clone --depth=1 https://github.com/dig1talGhost/wallpaper.git "$HYPRARCH2_TARGET/wallpaper"
 			break
 			;;
 		[Nn]*)
@@ -332,7 +332,7 @@ create_symlinks() {
 # This is an optional extra for a better looking prompt header.
 # Visit https://github.com/dig1talGhost/ghostshell for more info.
 get_ghostshell() {
-	local ghost_src="https://github.com/g5ostXa/ghostshell.git"
+	local ghost_src="https://github.com/dig1talGhost/ghostshell.git"
 	local ghost_cache="$HYPRARCH2_TARGET/.cache/ghostshell"
 	local ghost_build_bin="$ghost_cache/ghostshell"
 
