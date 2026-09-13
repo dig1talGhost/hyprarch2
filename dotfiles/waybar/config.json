@@ -134,7 +134,7 @@
   },
   "custom/distro": {
     "format": "󰣇 hyprarch2",
-    "tooltip": false,
+    "tooltip": "false",
     "on-click": "uwsm app -- rofi -show drun -replace"
   },
   "clock#time": {
